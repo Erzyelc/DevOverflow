@@ -17,7 +17,7 @@ const Navbar = () => {
           alt="Hipnode"
         />
         <p className="h2-bold font-spaceGrotesk text-dark-100 dark:text-light-900 max-sm:hidden">
-          Hip <span className="text-primary-500">Node</span>
+          Hip<span className="text-primary-500">Node</span>
         </p>
       </Link>
       <GlobalSearch />
