@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 import { QuestionsSchema } from "@/lib/validations";
 import { Badge } from "lucide-react";
 import Image from "next/image";
+import { createQuestion } from "@/lib/actions/question.action";
 
 const type: any = "create";
 
@@ -35,13 +36,14 @@ const Question = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof QuestionsSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
 
     try {
       // make an async call to your API to create a question
       // contan all form data
       // navigate to home page
+      await createQuestion({});
     } catch (error) {
     } finally {
       setIsSubmitting(false);
@@ -124,6 +126,10 @@ const Question = () => {
                   onInit={(evt, editor) => {
                     // @ts-ignore
                     editorRef.current = editor;
+                  }}
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => {
+                    field.onChange(content);
                   }}
                   initialValue=""
                   init={{
