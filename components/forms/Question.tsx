@@ -20,12 +20,19 @@ import { QuestionsSchema } from "@/lib/validations";
 import { Badge } from "lucide-react";
 import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
+import { useRouter, usePathname } from "next/navigation";
 
 const type: any = "create";
 
-const Question = () => {
+interface Props {
+  mongoUserID: string;
+}
+
+const Question = ({ mongoUserID }: Props) => {
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
@@ -43,7 +50,13 @@ const Question = () => {
       // make an async call to your API to create a question
       // contan all form data
       // navigate to home page
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(mongoUserID),
+      });
+      router.push("/");
     } catch (error) {
     } finally {
       setIsSubmitting(false);
