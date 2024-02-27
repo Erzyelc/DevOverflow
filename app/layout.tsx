@@ -18,7 +18,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Hipnode",
+  title: "DevOverflow",
   description:
     "An community driven platform asking and answering programming questions. Get help, share knowledge, and build your career.",
   icons: {
